@@ -1,0 +1,14 @@
+{
+  "browserstack.user": "",
+  "browserstack.key": "",
+  "platformName": "iOS",
+  "platformVersion": "14",
+  "deviceName": "iPhone 12 Pro",
+  "automationName": "XCUITest",
+  "app": "bs://8a3962331fc1569b3068e8a30e8dd19dab023ea6",
+  "noReset": false,
+  "fullReset": false,
+  "project": "TestApp iOS App Automation",
+  "build": "[iOS] Debug Build 1.0",
+  "name": "TestApp-Sanity"
+}

@@ -1,0 +1,13 @@
+*.pc
+*.pyc
+*.pyo
+*.swp
+*.swo
+*.pytest_cache
+*.idea
+__pycache__
+venv
+allure-results
+allure-report
+Logs
+.DS_Store

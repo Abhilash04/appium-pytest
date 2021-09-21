@@ -1,0 +1,11 @@
+# Framework
+pytest
+selenium
+Appium-Python-Client
+pycmd
+
+# Reporting
+allure-pytest
+
+# Compose
+funcy

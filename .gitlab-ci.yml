@@ -1,0 +1,66 @@
+stages:
+  - test
+  - reports
+  - notify
+
+android_sanity_tests:
+  image: python:slim-buster
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - py.cleanup -p && py.test --platform=bs_android -m sanity --alluredir allure-results/
+  artifacts:
+    name: "android-sanity-$CI_COMMIT_TAG"
+    expire_in: 1 week
+    when: always
+    paths:
+      - ./Logs
+      - ./allure-results
+
+ios_sanity_tests:
+  image: python:slim-buster
+  stage: test
+  script:
+    - pip install -r requirements.txt
+    - py.cleanup -p && py.test --platform=bs_ios -m sanity --alluredir allure-results/
+  when: manual
+  artifacts:
+    name: "ios-sanity-$CI_COMMIT_TAG"
+    expire_in: 1 week
+    when: always
+    paths:
+      - ./Logs
+      - ./allure-results
+
+generate_reports:
+  image: gitlab/dind
+  stage: reports
+  dependencies:
+    - android_sanity_tests
+#    - ios_sanity_tests
+  script:
+    - docker pull elixirops/docker-allure
+    - docker run -v $(pwd)/allure-report:/allure-report -v $(pwd)/allure-results:/allure-results elixirops/docker-allure allure generate /allure-results --clean -o /allure-report
+    - echo "REPORT_URL=https://abhilash04.gitlab.io/-/appium-pytest/-/jobs/$CI_JOB_ID/artifacts/allure-report/index.html" >> build.env
+
+  artifacts:
+    name: "mobile-$CI_COMMIT_TAG"
+    expire_in: 1 week
+    when: always
+    paths:
+      - ./allure-report
+    reports:
+      dotenv: build.env
+
+send_email:
+  stage: notify
+  dependencies:
+    - generate_reports
+  script:
+    - echo "$REPORT_URL"
+    - curl -s --user "api:$MAILGUN_API_KEY" \
+      "https://api.mailgun.net/v3/$MAILGUN_DOMAIN/messages" \
+      -F from='ElixirAutomation <Abhilash04@gitlab.com>' \
+      -F to=$GITLAB_USER_EMAIL \
+      -F subject='Test Execution Report' \
+      -F text="Please find the test execution report. $REPORT_URL"

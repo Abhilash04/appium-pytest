@@ -1,0 +1,6 @@
+{
+  "test_sanity_101": {
+    "tc_name": "test login functionality",
+    "test_data": {}
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "platformName": "iOS",
+  "platformVersion": "14.5",
+  "deviceName": "iPhone 12 Pro",
+  "automationName": "XCUITest",
+  "app": "TheApp.app.zip",
+  "noReset": false,
+  "fullReset": false
+}

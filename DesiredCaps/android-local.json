@@ -1,0 +1,9 @@
+{
+  "platformName": "Android",
+  "platformVersion": "11",
+  "deviceName": "Pixel_3a_API_30_x86",
+  "automationName": "uiautomator2",
+  "app": "TheApp.apk",
+  "noReset": false,
+  "fullReset": true
+}

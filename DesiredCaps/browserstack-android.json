@@ -1,0 +1,14 @@
+{
+  "browserstack.user": "",
+  "browserstack.key": "",
+  "platformName": "Android",
+  "platformVersion": "11.0",
+  "deviceName": "OnePlus 9",
+  "automationName": "uiautomator2",
+  "app": "bs://2a2fc8e44bc40150b821c060537e7e1ad0fd1c26",
+  "noReset": false,
+  "fullReset": true,
+  "project": "TestApp Android App Automation",
+  "build": "[AND] Debug Build 1.0",
+  "name": "TestApp-Sanity"
+}
